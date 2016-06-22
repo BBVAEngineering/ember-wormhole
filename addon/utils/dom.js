@@ -36,3 +36,6 @@ export function findElementById(doc, id) {
   }
 }
 
+export function querySelector(doc, selector) {
+  return doc.querySelector(selector);
+}

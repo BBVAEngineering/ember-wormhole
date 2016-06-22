@@ -2,7 +2,8 @@ import Ember from 'ember';
 import layout from '../templates/components/ember-wormhole';
 import {
   getActiveElement,
-  findElementById
+  findElementById,
+  querySelector
 } from '../utils/dom';
 
 const { Component, computed, observer, run } = Ember;
@@ -13,6 +14,7 @@ export default Component.extend({
   /*
    * Attrs
    */
+  selector: null,
   to: computed.alias('destinationElementId'),
   destinationElementId: null,
   destinationElement: computed('destinationElementId', 'renderInPlace', function() {
@@ -21,10 +23,11 @@ export default Component.extend({
       return this._element;
     }
     let id = this.get('destinationElementId');
-    if (!id) {
+    let selector = this.get('selector');
+    if (!id && !selector) {
       return null;
     }
-    return findElementById(this._dom.document, id);
+    return findElementById(this._dom.document, id) || querySelector(this._dom.document, selector);
   }),
   renderInPlace: false,
 
