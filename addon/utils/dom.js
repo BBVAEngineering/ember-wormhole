@@ -21,21 +21,6 @@ function childNodesOfElement(element) {
   return children;
 }
 
-export function findElementById(doc, id) {
-  let nodes = childNodesOfElement(doc);
-  let node;
-
-  while (nodes.length) {
-    node = nodes.shift();
-
-    if (node.getAttribute && node.getAttribute('id') === id) {
-      return node;
-    }
-
-    nodes = childNodesOfElement(node).concat(nodes);
-  }
-}
-
 export function querySelector(doc, selector) {
   return doc.querySelector(selector);
 }

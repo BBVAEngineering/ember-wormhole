@@ -24,10 +24,13 @@ export default Component.extend({
     }
     let id = this.get('destinationElementId');
     let selector = this.get('selector');
-    if (!id && !selector) {
+    if (id) {
+      selector = `#${id}`;
+    }
+    if (!selector) {
       return null;
     }
-    return findElementById(this._dom.document, id) || querySelector(this._dom.document, selector);
+    return querySelector(this._dom.document, selector);
   }),
   renderInPlace: false,
 
